@@ -14,6 +14,7 @@ export interface House {
 export interface Simulation {
     houses: House[];
     robots: Robot[];
+    numRobots: number;
     sequence: string;
     sequenceIndex: number;
 }
