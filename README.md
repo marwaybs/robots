@@ -1,47 +1,45 @@
-# Robots #
+# Interview Excercise 
 
-Robbie the robot and his pals deliver presents to houses. Build a
-program that runs a simulation given a number of robots and a string
-of their orders, keeps track of the state of the robots, and the
-presents they've delivered.
+## Problem Description
+A solution for the excercise found at https://weeverapps.github.io/interviews/robot.html[https://weeverapps.github.io/interviews/robot.html]
 
-The robots move in the 4 cardinal directions. They each take turns. On
-a robot's turn they will read one instruction from the moves sequence,
-move in the indicated direction, and attempt to deliver their present.
 
-A robot may deliver a present if, and only if, there are no other
-robots on the space in which they are ending their turn.
+## Solution
 
-For example, if there are 3 robots: `robbie`, `jane`, `bob`, and a
-move sequence of `^^VV<>` we should get the following moves:
+The function: `createSimulation` will create a new simulation which takes the number of robots (default to 1) and a sequence of movements (ex. "^^VV<>") as arguements. 
 
-    robbie ^
-    jane ^
-    bob V
-    robbie V
-    jane <
-    bob >
+It will start all robots off at the coordinates (0,0). Then you may pass the created simulation into the following functions:
+-  `stepOneTurn` to step a single step in the movement sequence
+-  `runFullSimulation` to run the whole sequence
+-  `printCurrentPositionsOfRobots` to print the current positions of robots to console and also return an object containing the name, x and y coordinates of each robot
+-  `queryHousesByNumPresents` to return how many houses have `numPresents` amount of presents or more
 
-A present is delivered when a robot enters a space in the world.
+## Running the solution
 
-## Requirements ##
+ **To setup:**
 
-The universe is a discrete grid of houses whose origin is `(0, 0)` and
-expands infinitely in every direction.
+ ```npm install```
 
-All robots start at the origin.
+ **To run tests:**
 
-The parameters to the simulation are:
+ ```npm run test```
 
-- the number of robots, defaulting to 1
-- the movement sequence, given as a string
+ **To run a sample simulation and see logged results:**
 
-The minimal set of operations we want to support are:
+ 1. Uncomment lines 115 - 120 in `src/robots.ts` which contain the following:
 
-- create a simulation
-- step through one turn
-- query the simulation for the current position of the robots
-- query the simulation for the number of houses with at least `n` presents
-    - `n` where 1 <= n <= max(int)
-- query the simulation for the total number of presents delivered
-- run the entire simulation through the full sequence of moves
+ ```
+ // Runs the simulation with 3 robots with the sequence ^^VV<>
+// prints the starting position and the final position of the robots
+let simulation = createSimulation(3, "^^VV<>");
+printCurrentPositionsOfRobots(simulation);
+simulation = runFullSimulation(simulation);
+printCurrentPositionsOfRobots(simulation);
+```
+
+2. Run `npm run start`
+
+## Stack
+- Typescript
+- Jest - For testing
+- falso[https://github.com/ngneat/falso] - To generate fake names
