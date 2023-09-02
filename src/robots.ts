@@ -100,9 +100,9 @@ export const runFullSimulation = (simulation: Simulation): Simulation => {
 }
 
 export const printCurrentPositionsOfRobots = (simulation: Simulation) => {
-    // Unclear what format to return the values, chose to print robots in table to console and return list of robots
+    // Unclear what format to return the values, chose to print robots in table to console and return list of robots with coords
     console.table(simulation.robots);
-    return simulation.robots;
+    return simulation.robots.map(robot => { return { name: robot.name, x: robot.x, y: robot.y } });
 }
 
 export const queryHousesByNumPresents = (simulation: Simulation, numPresents: number): number => {

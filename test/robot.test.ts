@@ -129,3 +129,13 @@ describe('Run full simulation', () => {
         expect(simulation.robots[2].y).toEqual(-1);
     })
 })
+
+describe('Query houses by number of presents', () => {
+    let simulation = createSimulation(10, "^^VV<>^^VV<>^^VV<>^^VV<>^^VV<>^^VV<>^^VV<>^^VV<>^^VV<>");
+    simulation = runFullSimulation(simulation)
+    it('Should return number of houses that have equal to or more than inputted number of presents', async () => {
+        expect(queryHousesByNumPresents(simulation, 1)).toEqual(15);
+        expect(queryHousesByNumPresents(simulation, 2)).toEqual(8);
+        expect(queryHousesByNumPresents(simulation, 3)).toEqual(2);
+    })
+})
