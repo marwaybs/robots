@@ -2,6 +2,7 @@ import { Robot, House, Simulation } from './interfaces';
 import { randFullName } from '@ngneat/falso';
 
 
+// Returns a robot object containing a random name, and starting position of (0,0)
 export const createRobot = (): Robot => {
     return {
         name: randFullName(),
@@ -11,6 +12,7 @@ export const createRobot = (): Robot => {
     }
 }
 
+// Creates a new simulation that creates a number of robots starting at (0,0), the passed in sequence, the sequence index at 0, and an empty list of houses
 export const createSimulation = (numRobots: number = 1, sequence: string): Simulation => {
     const robots = Array.from(Array(numRobots), () => createRobot());
     return {
@@ -22,7 +24,7 @@ export const createSimulation = (numRobots: number = 1, sequence: string): Simul
     }
 };
 
-
+// Updates the position of a passed in robot based on the direction provided
 export const updatePosition = (robot: Robot, direction: string): Robot => {
     switch (direction) {
         case '^':
@@ -44,6 +46,7 @@ export const updatePosition = (robot: Robot, direction: string): Robot => {
     return robot;
 }
 
+// Checks if the house exists in the list of houses, if it does, it increments the number of presents, if not, it creates a new house with 1 present
 export const updateHouse = (x: number, y: number, houses: House[]): House[] => {
     const house = houses.find(house => house.x === x && house.y === y)
     if (house) {
@@ -58,6 +61,7 @@ export const updateHouse = (x: number, y: number, houses: House[]): House[] => {
     return houses;
 }
 
+// Checks if the robot at the passed in robotIndex is in a unique position compared to all other robots
 export const checkIfUniquePosition = (robots: Robot[], robotIndex: number): boolean => {
     const robot = robots[robotIndex];
 
@@ -73,7 +77,9 @@ export const checkIfUniquePosition = (robots: Robot[], robotIndex: number): bool
     return true;
 }
 
-
+// Steps one turn in the simulation
+// This updates the next robot's position with the next movement in the sequence
+// It also checks if the robot is in a unique position and delivers a present if so
 export const stepOneTurn = (simulation: Simulation): Simulation => {
     if (simulation.sequenceIndex >= simulation.sequence.length) {
         throw new Error("End of sequence reached. Simulation is complete.");
@@ -95,6 +101,7 @@ export const stepOneTurn = (simulation: Simulation): Simulation => {
     return simulation;
 }
 
+// repeatedly calls stepOneTurn until the end of the sequence is reached
 export const runFullSimulation = (simulation: Simulation): Simulation => {
     while (simulation.sequenceIndex < simulation.sequence.length) {
         simulation = stepOneTurn(simulation);
@@ -102,12 +109,15 @@ export const runFullSimulation = (simulation: Simulation): Simulation => {
     return simulation;
 }
 
+// returns an array of robots and their positions
+// also prints a table of robots and their positions
 export const printCurrentPositionsOfRobots = (simulation: Simulation) => {
     // Unclear what format to return the values, chose to print robots in table to console and return list of robots with coords
     console.table(simulation.robots);
     return simulation.robots.map(robot => { return { name: robot.name, x: robot.x, y: robot.y } });
 }
 
+// returns the number of houses that have at least numPresents presents
 export const queryHousesByNumPresents = (simulation: Simulation, numPresents: number): number => {
     return simulation.houses.filter(house => house.numPresents >= numPresents).length;
 }
