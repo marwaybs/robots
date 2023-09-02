@@ -75,6 +75,9 @@ export const checkIfUniquePosition = (robots: Robot[], robotIndex: number): bool
 
 
 export const stepOneTurn = (simulation: Simulation): Simulation => {
+    if (simulation.sequenceIndex >= simulation.sequence.length) {
+        throw new Error("End of sequence reached. Simulation is complete.");
+    }
     const robotIndex = simulation.sequenceIndex % simulation.numRobots
 
     // update the current robot's position in the simulation
@@ -107,7 +110,7 @@ export const printCurrentPositionsOfRobots = (simulation: Simulation) => {
 
 export const queryHousesByNumPresents = (simulation: Simulation, numPresents: number): number => {
     return simulation.houses.filter(house => house.numPresents >= numPresents).length;
-} 
+}
 
 // // Runs the simulation with 3 robots with the sequence ^^VV<>
 // // prints the starting position and the final position of the robots
