@@ -1,4 +1,4 @@
-import { createSimulation, createRobot, updatePosition, updateHouse, checkIfUniquePosition, stepOneTurn } from "../src/robots";
+import { createSimulation, createRobot, updatePosition, updateHouse, checkIfUniquePosition, stepOneTurn, runFullSimulation, printCurrentPositionsOfRobots, queryHousesByNumPresents } from "../src/robots";
 
 describe('Create Robots', () => {
     const simulation = createRobot();
@@ -8,7 +8,7 @@ describe('Create Robots', () => {
 })
 
 describe('Create Simulation', () => {
-    const simulation = createSimulation(10, '<<>');
+    const simulation = createSimulation(10, '^^VV<>');
     it('should create a simulation with 10 robots', async () => {
         expect(simulation.robots.length).toEqual(10);
     }
@@ -21,7 +21,7 @@ describe('Update Position', () => {
         expect(updatePosition(robot, '^').y).toEqual(1);
     })
     it('should move the robot down', async () => {
-        expect(updatePosition(robot, 'v').y).toEqual(0);
+        expect(updatePosition(robot, 'V').y).toEqual(0);
     })
     it('should move the robot right', async () => {
         expect(updatePosition(robot, '>').x).toEqual(1);
@@ -108,4 +108,24 @@ describe('Step one turn', () => {
     it('should not move the other robot', async () => {
         expect(newSimulation.robots[1].x).toEqual(0);
     })
+    it('should throw error if end of sequence', async () => {
+        // 
+    })
 });
+
+describe('Run full simulation', () => {
+    let simulation = createSimulation(3, "^^VV<>");
+    simulation = runFullSimulation(simulation)
+    it('Should have correct state at the end of simulation', async () => {
+        expect(simulation.robots[0].presentsDelivered).toEqual(2);
+        expect(simulation.robots[1].presentsDelivered).toEqual(1);
+        expect(simulation.robots[2].presentsDelivered).toEqual(2);
+        expect(simulation.houses.length).toEqual(5);
+        expect(simulation.robots[0].x).toEqual(0);
+        expect(simulation.robots[0].y).toEqual(0);
+        expect(simulation.robots[1].x).toEqual(-1);
+        expect(simulation.robots[1].y).toEqual(1);
+        expect(simulation.robots[2].x).toEqual(1);
+        expect(simulation.robots[2].y).toEqual(-1);
+    })
+})
