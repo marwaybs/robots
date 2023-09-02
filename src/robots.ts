@@ -56,7 +56,7 @@ export const updateHouse = (x: number, y: number, houses: House[]): House[] => {
             x: x,
             y: y,
             numPresents: 1,
-        })
+        });
     }
     return houses;
 }
