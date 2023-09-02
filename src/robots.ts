@@ -38,7 +38,7 @@ export const updatePosition = (robot: Robot, direction: string): Robot => {
             robot.x--;
             break;
         default:
-            console.log('Invalid direction')
+            throw new Error('Invalid direction provided in sequence: ' + direction);
             break;
     }
     return robot;
