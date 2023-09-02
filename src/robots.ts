@@ -12,7 +12,7 @@ export const createSimulation = (numRobos: number, sequence: string): Simulation
     }
 };
 
-export const createRobot = () => {
+export const createRobot = (): Robot => {
     return {
         name: randFullName(),
         x: 0,
