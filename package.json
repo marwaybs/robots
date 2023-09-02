@@ -1,0 +1,21 @@
+{
+  "name": "robots",
+  "version": "1.0.0",
+  "description": "Robbie the robot and his pals deliver presents to houses. Build a program that runs a simulation given a number of robots and a string of their orders, keeps track of the state of the robots, and the presents they've delivered.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/robots.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.6.4",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
