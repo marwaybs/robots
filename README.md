@@ -6,7 +6,7 @@ A solution for the excercise found at https://weeverapps.github.io/interviews/ro
 
 ## Solution
 
-The function: `createSimulation` will create a new simulation which takes the number of robots (default to 1) and a sequence of movements (ex. "^^VV<>") as arguements. 
+The function: `createSimulation` will create a new simulation which takes the number of robots (default to 1) and a sequence of movements (ex. "^^VV<>") as arguments. 
 
 It will start all robots off at the coordinates (0,0). Then you may pass the created simulation into the following functions:
 -  `stepOneTurn` to step a single step in the movement sequence
