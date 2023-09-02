@@ -10,3 +10,10 @@ export interface House {
     y: number;
     numPresents: number;
 }
+
+export interface Simulation {
+    houses: House[];
+    robots: Robot[];
+    sequence: string;
+    sequenceIndex: number;
+}
