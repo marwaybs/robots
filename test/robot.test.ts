@@ -1,6 +1,6 @@
-import { createSimulation, createRobot } from "../src/robots";
+import { createSimulation, createRobot, updatePosition, updateHouse, checkIfUniquePosition, stepOneTurn } from "../src/robots";
 
-describe('Create Robot', () => {
+describe('Create Robots', () => {
     const simulation = createRobot();
     it('should create a robot with 0 presents delivered', async () => {
         expect(simulation.presentsDelivered).toEqual(0);
@@ -14,3 +14,98 @@ describe('Create Simulation', () => {
     }
     )
 })
+
+describe('Update Position', () => {
+    const robot = createRobot();
+    it('should move the robot up', async () => {
+        expect(updatePosition(robot, '^').y).toEqual(1);
+    })
+    it('should move the robot down', async () => {
+        expect(updatePosition(robot, 'v').y).toEqual(0);
+    })
+    it('should move the robot right', async () => {
+        expect(updatePosition(robot, '>').x).toEqual(1);
+    })
+    it('should move the robot left', async () => {
+        expect(updatePosition(robot, '<').x).toEqual(0);
+    })
+    it('should not move the robot', async () => {
+        expect(updatePosition(robot, 'x').x).toEqual(0);
+    })
+})
+
+describe('Update House', () => {
+    const houses = updateHouse(2, 2, []);
+    it('should create a new house', async () => {
+        expect(houses.length).toEqual(1);
+    })
+    it('should increase the number of presents', async () => {
+        expect(updateHouse(2, 2, houses)[0].numPresents).toEqual(2);
+    })
+})
+
+describe('Check if unique position', () => {
+    const samePositionRobots = [{
+        name: 'Tom',
+        presentsDelivered: 0,
+        x: 2,
+        y: 1,
+    },
+    //different from first robot
+    {
+        name: 'Joelle',
+        presentsDelivered: 0,
+        x: 2,
+        y: 2,
+    },
+    //same as first robot
+    {
+        name: 'Dudley',
+        presentsDelivered: 0,
+        x: 2,
+        y: 1,
+    }]
+
+    const differentPositionRobots = [{
+        name: 'Tom',
+        presentsDelivered: 0,
+        x: 2,
+        y: 1,
+    },
+    {
+        name: 'Joelle',
+        presentsDelivered: 0,
+        x: 2,
+        y: 2,
+    },
+    {
+        name: 'Dudley',
+        presentsDelivered: 0,
+        x: 3,
+        y: 1,
+    }]
+
+    it('should return false if the position is not unique', async () => {
+        expect(checkIfUniquePosition(samePositionRobots, 0)).toEqual(false);
+    })
+    it('should return true if the position is unique', async () => {
+        expect(checkIfUniquePosition(differentPositionRobots, 0)).toEqual(true);
+    })
+})
+
+describe('Step one turn', () => {
+    const simulation = createSimulation(2, '^^VV<>');
+    const newSimulation = stepOneTurn(simulation);
+    it('should increase the presents delivered by 1', async () => {
+        expect(newSimulation.robots[0].presentsDelivered).toEqual(1);
+    })
+    it('should increase the sequence index by 1', async () => {
+        expect(newSimulation.sequenceIndex).toEqual(1);
+    })
+    it('should move the robot', async () => {
+        expect(newSimulation.robots[0].y).toEqual(1);
+    })
+    it('should not move the other robot', async () => {
+        expect(newSimulation.robots[1].x).toEqual(0);
+    })
+});
