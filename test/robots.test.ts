@@ -1,4 +1,5 @@
-import { createSimulation, createRobot, updatePosition, updateHouse, checkIfUniquePosition, stepOneTurn, runFullSimulation, printCurrentPositionsOfRobots, queryHousesByNumPresents } from "../src/robots";
+import { createSimulation,  stepOneTurn, runFullSimulation, printCurrentPositionsOfRobots, queryHousesByNumPresents } from "../src/robots";
+import { createRobot, updatePosition, updateHouse, checkIfUniquePosition } from "../src/helpers";
 
 describe('Create Robots', () => {
     const simulation = createRobot();
