@@ -29,8 +29,8 @@ describe('Update Position', () => {
     it('should move the robot left', async () => {
         expect(updatePosition(robot, '<').x).toEqual(0);
     })
-    it('should not move the robot', async () => {
-        expect(updatePosition(robot, 'x').x).toEqual(0);
+    it('Invalid symbol should throw error', async () => {
+        expect(() => (updatePosition(robot, 'x'))).toThrow("Invalid direction provided in sequence: x");
     })
 })
 
@@ -94,22 +94,27 @@ describe('Check if unique position', () => {
 })
 
 describe('Step one turn', () => {
-    const simulation = createSimulation(2, '^^VV<>');
-    const newSimulation = stepOneTurn(simulation);
+    let simulation = createSimulation(2, '^^VV<>');
+    simulation = stepOneTurn(simulation);
+
+    let completeSimulation = createSimulation(2, '^^VV<>');
+    completeSimulation.sequenceIndex = 6;
+
     it('should increase the presents delivered by 1', async () => {
-        expect(newSimulation.robots[0].presentsDelivered).toEqual(1);
+        expect(simulation.robots[0].presentsDelivered).toEqual(1);
     })
     it('should increase the sequence index by 1', async () => {
-        expect(newSimulation.sequenceIndex).toEqual(1);
+        expect(simulation.sequenceIndex).toEqual(1);
     })
     it('should move the robot', async () => {
-        expect(newSimulation.robots[0].y).toEqual(1);
+        expect(simulation.robots[0].y).toEqual(1);
     })
     it('should not move the other robot', async () => {
-        expect(newSimulation.robots[1].x).toEqual(0);
+        expect(simulation.robots[1].x).toEqual(0);
     })
+
     it('should throw error if end of sequence', async () => {
-        // 
+        expect(() => (stepOneTurn(completeSimulation))).toThrow("End of sequence reached. Simulation is complete.");
     })
 });
 
