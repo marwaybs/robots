@@ -11,7 +11,7 @@ export const createRobot = (): Robot => {
     }
 }
 
-export const createSimulation = (numRobots: number, sequence: string): Simulation => {
+export const createSimulation = (numRobots: number = 1, sequence: string): Simulation => {
     const robots = Array.from(Array(numRobots), () => createRobot());
     return {
         robots,
@@ -28,7 +28,7 @@ export const updatePosition = (robot: Robot, direction: string): Robot => {
         case '^':
             robot.y++;
             break;
-        case 'v':
+        case 'V':
             robot.y--;
             break;
         case '>':
@@ -92,3 +92,26 @@ export const stepOneTurn = (simulation: Simulation): Simulation => {
     return simulation;
 }
 
+export const runFullSimulation = (simulation: Simulation): Simulation => {
+    while (simulation.sequenceIndex < simulation.sequence.length) {
+        simulation = stepOneTurn(simulation);
+    }
+    return simulation;
+}
+
+export const printCurrentPositionsOfRobots = (simulation: Simulation) => {
+    // Unclear what format to return the values, chose to print robots in table to console and return list of robots
+    console.table(simulation.robots);
+    return simulation.robots;
+}
+
+export const queryHousesByNumPresents = (simulation: Simulation, numPresents: number): number => {
+    return simulation.houses.filter(house => house.numPresents >= numPresents).length;
+} 
+
+// // Runs the simulation with 3 robots with the sequence ^^VV<>
+// // prints the starting position and the final position of the robots
+// let simulation = createSimulation(3, "^^VV<>");
+// printCurrentPositionsOfRobots(simulation);
+// simulation = runFullSimulation(simulation);
+// printCurrentPositionsOfRobots(simulation);
