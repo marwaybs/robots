@@ -64,3 +64,4 @@ export const queryHousesByNumPresents = (simulation: Simulation, numPresents: nu
 // printCurrentPositionsOfRobots(simulation);
 // simulation = runFullSimulation(simulation);
 // printCurrentPositionsOfRobots(simulation);
+// console.log("houses with more than 1 present: " + queryHousesByNumPresents(simulation, 1));

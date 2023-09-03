@@ -26,15 +26,16 @@ It will start all robots off at the coordinates (0,0). Then you may pass the cre
 
  **To run a sample simulation and see logged results:**
 
- 1. Uncomment lines 115 - 120 in `src/robots.ts` which contain the following:
+ 1. Uncomment the [final block of comments](https://github.com/marwaybs/robots/blob/828a2a376596ad5d95193256100ef486b460bf26/src/robots.ts#L61-L67) in `src/robots.ts` which contain the following:
 
  ```
- // Runs the simulation with 3 robots with the sequence ^^VV<>
+// Runs the simulation with 3 robots with the sequence ^^VV<>
 // prints the starting position and the final position of the robots
 let simulation = createSimulation(3, "^^VV<>");
 printCurrentPositionsOfRobots(simulation);
 simulation = runFullSimulation(simulation);
 printCurrentPositionsOfRobots(simulation);
+console.log("houses with more than 1 present: " + queryHousesByNumPresents(simulation, 1));
 ```
 
 2. Run `npm run start`
