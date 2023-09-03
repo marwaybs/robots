@@ -98,7 +98,7 @@ describe('Step one turn', () => {
     let simulation = createSimulation(2, '^^VV<>');
     simulation = stepOneTurn(simulation);
 
-    let completeSimulation = createSimulation(2, '^^VV<>');
+    const completeSimulation = createSimulation(2, '^^VV<>');
     completeSimulation.sequenceIndex = 6;
 
     it('should increase the presents delivered by 1', async () => {
