@@ -1,4 +1,4 @@
-import { Robot, House, Simulation } from './interfaces';
+import { Simulation } from './interfaces';
 import { createRobot, updatePosition, updateHouse, checkIfUniquePosition } from './helpers';
 
 // Creates a new simulation that creates a number of robots starting at (0,0), the passed in sequence, the sequence index at 0, and an empty list of houses
