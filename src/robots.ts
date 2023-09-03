@@ -39,6 +39,7 @@ export const stepOneTurn = (simulation: Simulation): Simulation => {
 
 // repeatedly calls stepOneTurn until the end of the sequence is reached
 export const runFullSimulation = (simulation: Simulation): Simulation => {
+    // sequenceIndex is incremented in stepOneTurn by one for each function call
     while (simulation.sequenceIndex < simulation.sequence.length) {
         simulation = stepOneTurn(simulation);
     }
