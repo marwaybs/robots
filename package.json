@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/robots.ts",
+    "build": "tsc",
     "test": "jest",
     "test-watch": "npx jest --watch",
     "lint": "eslint src/**/*.ts",
