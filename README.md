@@ -1,7 +1,8 @@
 # Interview Excercise 
 
 ## Problem Description
-A solution for the excercise found at https://weeverapps.github.io/interviews/robot.html
+
+The excercise can be found at: https://weeverapps.github.io/interviews/robot.html
 
 
 ## Solution
