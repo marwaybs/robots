@@ -42,6 +42,6 @@ console.log("houses with more than 1 present: " + queryHousesByNumPresents(simul
 2. Run `npm run start`
 
 ## Stack
-- Typescript
-- Jest - For testing
-- falso[https://github.com/ngneat/falso] - To generate fake names
+- [Typescript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/) - For testing
+- [falso](https://github.com/ngneat/falso) - To generate fake names
