@@ -36,6 +36,7 @@ let simulation = createSimulation(3, "^^VV<>");
 printCurrentPositionsOfRobots(simulation);
 simulation = runFullSimulation(simulation);
 printCurrentPositionsOfRobots(simulation);
+// prints the number of houses with at least 1 present
 console.log("houses with more than 1 present: " + queryHousesByNumPresents(simulation, 1));
 ```
 
