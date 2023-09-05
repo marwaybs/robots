@@ -3,6 +3,9 @@ import { createRobot, updatePosition, updateHouse, checkIfUniquePosition } from 
 
 // Creates a new simulation that creates a number of robots starting at (0,0), the passed in sequence, the sequence index at 0, and an empty list of houses
 export const createSimulation = (numRobots: number = 1, sequence: string): Simulation => {
+    if (numRobots < 1) {
+        throw new Error("Number of robots must be greater than 0");
+    }
     const robots = Array.from(Array(numRobots), () => createRobot());
     return {
         robots,
